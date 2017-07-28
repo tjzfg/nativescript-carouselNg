@@ -7,7 +7,7 @@ import {TouchGestureEventData} from "tns-core-modules/ui/gestures";
 @Component({
     selector:"ns-carousel",
     template:"",
-    inputs:["autoPagingInterval","showIndicator","height","indicatorColor"]
+    inputs:["autoPagingInterval","showIndicator","height","indicatorColor","indicatorColorUnselected","indicatorRadius","indicatorPadding","indicatorOffset"]
 })
 export class NgCarouselComponent{
     @ContentChildren(forwardRef(() => NgCarouselItemComponent)) items: QueryList<NgCarouselItemComponent>;
@@ -16,7 +16,11 @@ export class NgCarouselComponent{
     showIndicator=true;
     height=400;
     indicatorColor="yellow";
+    indicatorColorUnselected="#eee";
     finite=false;
+    indicatorRadius=5;
+    indicatorPadding=5;
+    indicatorOffset="0,0";
 
     androidInterval;
     androidIntervalFlag:boolean;
@@ -39,6 +43,12 @@ export class NgCarouselComponent{
         carousel.indicatorColor=this.indicatorColor;
         carousel["finite"]=this.finite;
         carousel["autoPagingInterval"]=this.autoPagingInterval;
+        carousel["indicatorColorUnselected"]=this.indicatorColorUnselected;
+        carousel["indicatorRadius"]=this.indicatorColorUnselected;
+        carousel["indicatorPadding"]=this.indicatorColorUnselected;
+        carousel["indicatorColorUnselected"]=this.indicatorColorUnselected;
+        carousel["indicatorOffset"]=this.indicatorOffset;
+
         //alert("change start");
         this.parent.removeChildren();
         this.items.forEach(comp=>{

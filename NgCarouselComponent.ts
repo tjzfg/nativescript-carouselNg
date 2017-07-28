@@ -25,7 +25,7 @@ export class NgCarouselComponent{
     }
     ngAfterViewInit(){
         console.log("init start");
-        alert("init start");
+        //alert("init start");
         this.parent=this.comp.nativeElement.parent;
         this.setUp();
         this.items.changes.subscribe(val=>{
@@ -39,7 +39,7 @@ export class NgCarouselComponent{
         carousel.indicatorColor=this.indicatorColor;
         carousel["finite"]=this.finite;
         carousel["autoPagingInterval"]=this.autoPagingInterval;
-        alert("change start");
+        //alert("change start");
         this.parent.removeChildren();
         this.items.forEach(comp=>{
             let cItem:CarouselItem=new CarouselItem();
@@ -52,7 +52,7 @@ export class NgCarouselComponent{
 
         });
         if(this.androidInterval) clearInterval(this.androidInterval);
-        if(isAndroid){
+        if(isAndroid && this.androidInterval>0){
             this.androidInterval=setInterval(()=>{
                 if(!this.androidIntervalFlag) return;
                 if(carousel["selectedPage"]==this.items.length-1){

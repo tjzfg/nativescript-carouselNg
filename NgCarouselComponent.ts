@@ -43,9 +43,9 @@ export class NgCarouselComponent{
         carousel.indicatorColor=this.indicatorColor;
         carousel["finite"]=this.finite;
         carousel["autoPagingInterval"]=this.autoPagingInterval;
-        carousel["indicatorColorUnselected"]=this.indicatorColorUnselected;
-        carousel["indicatorRadius"]=this.indicatorColorUnselected;
-        carousel["indicatorPadding"]=this.indicatorColorUnselected;
+        //carousel["indicatorColorUnselected"]=this.indicatorColorUnselected;
+        carousel["indicatorRadius"]=this.indicatorRadius;
+        carousel["indicatorPadding"]=this.indicatorPadding;
         carousel["indicatorColorUnselected"]=this.indicatorColorUnselected;
         carousel["indicatorOffset"]=this.indicatorOffset;
 

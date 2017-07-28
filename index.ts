@@ -1,0 +1,1 @@
+export {NgCarouselModule} from "./NgCarouselModule"

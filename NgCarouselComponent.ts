@@ -52,9 +52,9 @@ export class NgCarouselComponent{
 
         });
         if(this.androidInterval) clearInterval(this.androidInterval);
-        if(isAndroid && this.androidInterval>0){
+        if(isAndroid && this.autoPagingInterval>0){
             this.androidInterval=setInterval(()=>{
-                if(!this.autoPagingInterval) return;
+                if(!this.androidInterval) return;
                 if(carousel["selectedPage"]==this.items.length-1){
                     if(!this.finite){
                         carousel["selectedPage"]=0;

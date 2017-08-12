@@ -1,6 +1,7 @@
 import {Component, ComponentRef, ContentChildren, ElementRef, forwardRef, QueryList, ViewChildren} from "@angular/core";
 import {NgCarouselItemComponent} from "./NgCarouselItemComponent";
-import {Carousel, CarouselItem} from "nativescript-carousel";
+let Carousel=require("nativescript-carousel").Carousel;
+let CarouselItem=require("nativescript-carousel").CarouselItem;
 import {isAndroid} from "platform"
 import {TouchGestureEventData} from "tns-core-modules/ui/gestures";
 
@@ -38,11 +39,11 @@ export class NgCarouselComponent{
     }
     setUp(){
 
-        let carousel:Carousel=new Carousel();
+        let carousel=new Carousel();
         carousel.height=this.height;
         carousel.indicatorColor=this.indicatorColor;
-        carousel["finite"]=this.finite;
-        carousel["autoPagingInterval"]=this.autoPagingInterval;
+        carousel.finite=this.finite;
+        carousel.autoPagingInterval=this.autoPagingInterval;
         //carousel["indicatorColorUnselected"]=this.indicatorColorUnselected;
         carousel["indicatorRadius"]=this.indicatorRadius;
         carousel["indicatorPadding"]=this.indicatorPadding;
@@ -52,7 +53,7 @@ export class NgCarouselComponent{
         //alert("change start");
         this.parent.removeChildren();
         this.items.forEach(comp=>{
-            let cItem:CarouselItem=new CarouselItem();
+            let cItem=new CarouselItem();
             let _parent=comp.element.parent;
             if(_parent!=null){
                 _parent.removeChild(comp.element);
@@ -65,9 +66,9 @@ export class NgCarouselComponent{
         if(isAndroid && this.autoPagingInterval>0){
             this.androidInterval=setInterval(()=>{
                 if(!this.androidInterval) return;
-                if(carousel["selectedPage"]==this.items.length-1){
+                if(carousel.selectedPage==this.items.length-1){
                     if(!this.finite){
-                        carousel["selectedPage"]=0;
+                        carousel.selectedPage=0;
                     }else{
                         if(this.androidInterval) clearInterval(this.androidInterval);
                     }

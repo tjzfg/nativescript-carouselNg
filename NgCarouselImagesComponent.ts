@@ -3,9 +3,9 @@ import {screen} from "platform";
 
 @Component({
     selector:"ns-carousel-images",
-    template:`<ns-carousel height="{{pageWidth*scale}}">
+    template:`<ns-carousel height="{{pageWidth*ratio}}">
             <ns-carousel-item *ngFor="let image of images|async">
-                <Image src="{{picUrl+image}}" decodeWidth="{{pageWidth}}" decodeHeight="{{pageWidth*scale}}"></Image>
+                <Image src="{{picUrl+image}}" decodeWidth="{{pageWidth}}" decodeHeight="{{pageWidth*ratio}}"></Image>
             </ns-carousel-item>
         </ns-carousel>`,
     changeDetection:ChangeDetectionStrategy.OnPush

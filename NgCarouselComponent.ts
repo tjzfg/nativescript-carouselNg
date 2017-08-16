@@ -46,19 +46,18 @@ export class NgCarouselComponent{
             this.setUp();
         });
     }
+    carousel=new Carousel();
     setUp(){
-
-        let carousel=new Carousel();
-        carousel.height=this.height;
-        carousel.indicatorColor=this.indicatorColor;
-        carousel.finite=this.finite;
-        carousel.autoPagingInterval=this.autoPagingInterval;
+        // this.carousel=new Carousel();
+        this.carousel.height=this.height;
+        this.carousel.indicatorColor=this.indicatorColor;
+        this.carousel.finite=this.finite;
+        this.carousel.autoPagingInterval=this.autoPagingInterval;
         //carousel["indicatorColorUnselected"]=this.indicatorColorUnselected;
-        carousel["indicatorRadius"]=this.indicatorRadius;
-        carousel["indicatorPadding"]=this.indicatorPadding;
-        carousel["indicatorColorUnselected"]=this.indicatorColorUnselected;
-        carousel["indicatorOffset"]=this.indicatorOffset;
-
+        this.carousel["indicatorRadius"]=this.indicatorRadius;
+        this.carousel["indicatorPadding"]=this.indicatorPadding;
+        this.carousel["indicatorColorUnselected"]=this.indicatorColorUnselected;
+        this.carousel["indicatorOffset"]=this.indicatorOffset;
         //alert("change start");
         this.parent.removeChildren();
         this.items.forEach(comp=>{
@@ -68,25 +67,25 @@ export class NgCarouselComponent{
                 _parent.removeChild(comp.element);
             }
             cItem.addChild(comp.element);
-            carousel.addChild(cItem);
+            this.carousel.addChild(cItem);
 
         });
         if(this.androidInterval) clearInterval(this.androidInterval);
         if(isAndroid && this.autoPagingInterval>0){
             this.androidInterval=setInterval(()=>{
                 if(!this.androidInterval) return;
-                if(carousel.selectedPage==this.items.length-1){
+                if(this.carousel.selectedPage==this.items.length-1){
                     if(!this.finite){
-                        carousel.selectedPage=0;
+                        this.carousel.selectedPage=0;
                     }else{
                         if(this.androidInterval) clearInterval(this.androidInterval);
                     }
                 }else{
-                //alert(carousel["selectedPage"]);
-                    carousel["selectedPage"]+=1;
+                    //alert(carousel["selectedPage"]);
+                    this.carousel["selectedPage"]+=1;
                 }
             },this.autoPagingInterval);
-            carousel["on"]("touch",(e:TouchGestureEventData)=>{
+            this.carousel["on"]("touch",(e:TouchGestureEventData)=>{
                 switch (e.action){
                     case "down":
                         this.androidIntervalFlag=false;
@@ -97,12 +96,12 @@ export class NgCarouselComponent{
                         break;
                 }
             });
-            carousel["on"]("unloaded",e=>{
-                carousel["off"]("touch");
+            this.carousel["on"]("unloaded",e=>{
+                this.carousel["off"]("touch");
                 if(this.androidInterval) clearInterval(this.androidInterval);
             })
         }
-        this.parent.addChild(carousel);
+        this.parent.addChild(this.carousel);
         this.carousel["on"]("pageChanged",this.pageChanged);
         this.carousel["selectedPage"]=this.selectedPage;
     }

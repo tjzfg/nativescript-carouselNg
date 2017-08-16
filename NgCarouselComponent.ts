@@ -8,7 +8,8 @@ import {TouchGestureEventData} from "tns-core-modules/ui/gestures";
 @Component({
     selector:"ns-carousel",
     template:"",
-    inputs:["autoPagingInterval","showIndicator","height","indicatorColor","indicatorColorUnselected","indicatorRadius","indicatorPadding","indicatorOffset"]
+    inputs:["autoPagingInterval","showIndicator","height","indicatorColor","indicatorColorUnselected","indicatorRadius",
+        "indicatorPadding","indicatorOffset","selectedPage","pageChanged"]
 })
 export class NgCarouselComponent{
     @ContentChildren(forwardRef(() => NgCarouselItemComponent)) items: QueryList<NgCarouselItemComponent>;
@@ -22,9 +23,17 @@ export class NgCarouselComponent{
     indicatorRadius=5;
     indicatorPadding=5;
     indicatorOffset="0,0";
-
+    pageChanged=()=>{};
     androidInterval;
     androidIntervalFlag:boolean;
+    get selectedPage():number{
+        return this.selectedPage;
+    }
+    set selectedPage(selectedPage:number){
+        this.selectedPage=selectedPage;
+        this.carousel.selectedPage=selectedPage;
+    }
+    _selectedPage=0;
     constructor(private comp:ElementRef){
         //comp.nativeElement
     }
@@ -94,5 +103,7 @@ export class NgCarouselComponent{
             })
         }
         this.parent.addChild(carousel);
+        this.carousel["on"]("pageChanged",this.pageChanged);
+        this.carousel["selectedPage"]=this.selectedPage;
     }
 }

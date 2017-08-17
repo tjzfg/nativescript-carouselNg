@@ -27,10 +27,10 @@ export class NgCarouselComponent{
     androidInterval;
     androidIntervalFlag:boolean;
     get selectedPage():number{
-        return this.selectedPage;
+        return this._selectedPage;
     }
     set selectedPage(selectedPage:number){
-        this.selectedPage=selectedPage;
+        this._selectedPage=selectedPage;
         this.carousel.selectedPage=selectedPage;
     }
     _selectedPage=0;
@@ -49,6 +49,7 @@ export class NgCarouselComponent{
     carousel=new Carousel();
     setUp(){
         // this.carousel=new Carousel();
+        this.carousel.showIndicator=this.showIndicator;
         this.carousel.height=this.height;
         this.carousel.indicatorColor=this.indicatorColor;
         this.carousel.finite=this.finite;

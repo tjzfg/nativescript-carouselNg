@@ -61,6 +61,7 @@ export class NgCarouselComponent{
         this.carousel["indicatorOffset"]=this.indicatorOffset;
         //alert("change start");
         this.parent.removeChildren();
+        this.carousel.removeChildren();
         this.items.forEach(comp=>{
             let cItem=new CarouselItem();
             let _parent=comp.element.parent;
